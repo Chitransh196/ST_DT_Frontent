@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>College Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <h2>🎓 College Management</h2>
+  </div>
+
+  <div class="container">
+    <div class="card" onclick="go('signup.html')">
+      <h3>Signup</h3>
+      <p>Create new user</p>
+    </div>
+
+    <div class="card" onclick="go('login.html')">
+      <h3>Login</h3>
+      <p>User login</p>
+    </div>
+
+    <div class="card" onclick="go('department.html')">
+      <h3>Departments</h3>
+      <p>Manage departments</p>
+    </div>
+
+    <div class="card" onclick="go('student.html')">
+      <h3>Students</h3>
+      <p>Manage students</p>
+    </div>
+  </div>
+
+  <script>
+    function go(page) {
+      window.location.href = page;
+    }
+  </script>
+
+</body>
+</html>
