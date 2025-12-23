@@ -1,10 +1,10 @@
-const BASE_URL = "https://student-departmnet-backend.onrender.com";
+const API_URL = "https://student-departmnet-backend.onrender.com";
 
 function signup() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  fetch(`${BASE_URL}/signup`, {
+  fetch(`${API_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password })
@@ -23,7 +23,7 @@ function login() {
   const username = document.getElementById("login_username").value;
   const password = document.getElementById("login_password").value;
 
-  fetch(`${BASE_URL}/login`, {
+  fetch(`${API_URL}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password })
@@ -52,7 +52,7 @@ function addDepartment() {
   const name = document.getElementById("dept_name").value;
   const token = localStorage.getItem("token");
 
-  fetch(`${BASE_URL}/departments`, {
+  fetch(`${API_URL}/departments`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -65,7 +65,7 @@ function addDepartment() {
 }
 
 function loadDepartments() {
-  fetch(`${BASE_URL}/departments`)
+  fetch(`${API_URL}/departments`)
     .then(res => res.json())
     .then(data => {
       const list = document.getElementById("dept_list");
@@ -84,7 +84,7 @@ function addStudent() {
   const department_id = document.getElementById("department_select").value;
   const token = localStorage.getItem("token");
 
-  fetch(`${BASE_URL}/students`, {
+  fetch(`${API_URL}/students`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -97,7 +97,7 @@ function addStudent() {
 }
 
 function loadStudents() {
-  fetch(`${BASE_URL}/students`)
+  fetch(`${API_URL}/students`)
     .then(res => res.json())
     .then(data => {
       const list = document.getElementById("student_list");
@@ -112,7 +112,7 @@ function loadStudents() {
 }
 
 function loadDepartmentDropdown() {
-  fetch(`${BASE_URL}/departments`)
+  fetch(`${API_URL}/departments`)
     .then(res => res.json())
     .then(data => {
       const select = document.getElementById("department_select");
