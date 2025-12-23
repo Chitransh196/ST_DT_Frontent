@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Student</title>
   <link rel="stylesheet" href="design.css">
 </head>
@@ -8,13 +9,26 @@
 
   <h2>Student Page</h2>
 
-  <input id="student_name" placeholder="Student name">
+  <input
+    id="student_name"
+    type="text"
+    placeholder="Student name"
+    required
+  >
 
-  <select id="department_select">
+  <select
+    id="department_select"
+    required
+  >
     <option value="">Select Department</option>
   </select>
 
-  <button onclick="addStudent()">Add Student</button>
+  <button
+    type="button"
+    onclick="addStudent()"
+  >
+    Add Student
+  </button>
 
   <h3>All Students</h3>
   <ul id="student_list"></ul>

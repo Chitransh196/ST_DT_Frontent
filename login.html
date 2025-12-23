@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Login</title>
   <link rel="stylesheet" href="design.css">
 </head>
@@ -9,10 +10,27 @@
   <div class="card small">
     <h2>Login</h2>
 
-    <input id="login_username" placeholder="Username">
-    <input id="login_password" type="password" placeholder="Password">
+    <input
+      id="login_username"
+      type="text"
+      placeholder="Username"
+      required
+    >
 
-    <button class="btn full" onclick="login()">Login</button>
+    <input
+      id="login_password"
+      type="password"
+      placeholder="Password"
+      required
+    >
+
+    <button
+      class="btn full"
+      onclick="login(event)"
+      type="button"
+    >
+      Login
+    </button>
 
     <p id="login_msg" class="msg"></p>
 
@@ -23,6 +41,4 @@
   </div>
 
   <script src="script.js"></script>
-</body>
-</html>
-
+</b

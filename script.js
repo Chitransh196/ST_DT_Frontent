@@ -1,45 +1,69 @@
 const API_URL = "https://student-departmnet-backend.onrender.com";
 
-function signup() {
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+function signup(event) {
+  if (event) event.preventDefault();
+
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const msg = document.getElementById("msg");
+
+  msg.innerText = "";
+
+  if (!username || !password) {
+    msg.innerText = "All fields are required";
+    return;
+  }
 
   fetch(`${API_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password })
   })
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("msg").innerText =
-        data.message || data.detail || "Signup completed";
+    .then(async res => {
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || "Signup failed");
+      return data;
     })
-    .catch(() => {
-      document.getElementById("msg").innerText = "Server error";
+    .then(data => {
+      msg.style.color = "green";
+      msg.innerText = data.message || "Signup successful";
+    })
+    .catch(err => {
+      msg.style.color = "red";
+      msg.innerText = err.message;
     });
 }
 
-function login() {
-  const username = document.getElementById("login_username").value;
-  const password = document.getElementById("login_password").value;
+function login(event) {
+  if (event) event.preventDefault();
+
+  const username = document.getElementById("login_username").value.trim();
+  const password = document.getElementById("login_password").value.trim();
+  const msg = document.getElementById("login_msg");
+
+  msg.innerText = "";
+
+  if (!username || !password) {
+    msg.innerText = "All fields are required";
+    return;
+  }
 
   fetch(`${API_URL}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password })
   })
-    .then(res => res.json())
-    .then(data => {
-      if (data.access_token) {
-        localStorage.setItem("token", data.access_token);
-        window.location.href = "dashboard.html";
-      } else {
-        document.getElementById("login_msg").innerText =
-          data.detail || "Login failed";
-      }
+    .then(async res => {
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || "Login failed");
+      return data;
     })
-    .catch(() => {
-      document.getElementById("login_msg").innerText = "Server error";
+    .then(data => {
+      localStorage.setItem("token", data.access_token);
+      window.location.href = "dashboard.html";
+    })
+    .catch(err => {
+      msg.innerText = err.message;
     });
 }
 
@@ -49,8 +73,13 @@ function logout() {
 }
 
 function addDepartment() {
-  const name = document.getElementById("dept_name").value;
+  const name = document.getElementById("dept_name").value.trim();
   const token = localStorage.getItem("token");
+
+  if (!name) {
+    alert("Department name required");
+    return;
+  }
 
   fetch(`${API_URL}/departments`, {
     method: "POST",
@@ -61,7 +90,11 @@ function addDepartment() {
     body: JSON.stringify({ name })
   })
     .then(res => res.json())
-    .then(() => loadDepartments());
+    .then(() => {
+      document.getElementById("dept_name").value = "";
+      loadDepartments();
+      loadDepartmentDropdown();
+    });
 }
 
 function loadDepartments() {
@@ -80,9 +113,14 @@ function loadDepartments() {
 }
 
 function addStudent() {
-  const name = document.getElementById("student_name").value;
-  const department_id = document.getElementById("department_select").value;
+  const name = document.getElementById("student_name").value.trim();
+  const dept_id = document.getElementById("department_select").value;
   const token = localStorage.getItem("token");
+
+  if (!name || !dept_id) {
+    alert("All fields required");
+    return;
+  }
 
   fetch(`${API_URL}/students`, {
     method: "POST",
@@ -90,10 +128,13 @@ function addStudent() {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${token}`
     },
-    body: JSON.stringify({ name, department_id })
+    body: JSON.stringify({ name, dept_id })
   })
     .then(res => res.json())
-    .then(() => loadStudents());
+    .then(() => {
+      document.getElementById("student_name").value = "";
+      loadStudents();
+    });
 }
 
 function loadStudents() {
@@ -105,7 +146,7 @@ function loadStudents() {
       list.innerHTML = "";
       data.forEach(student => {
         const li = document.createElement("li");
-        li.innerText = `${student.name} (Dept ID: ${student.department_id})`;
+        li.innerText = `${student.name} (Dept ID: ${student.dept_id})`;
         list.appendChild(li);
       });
     });

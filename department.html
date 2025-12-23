@@ -1,16 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Department</title>
   <link rel="stylesheet" href="design.css">
-
 </head>
 <body>
 
   <h2>Department Page</h2>
 
-  <input id="dept_name" placeholder="Department name">
-  <button onclick="addDepartment()">Add Department</button>
+  <input
+    id="dept_name"
+    type="text"
+    placeholder="Department name"
+    required
+  >
+
+  <button
+    type="button"
+    onclick="addDepartment()"
+  >
+    Add Department
+  </button>
 
   <h3>All Departments</h3>
   <ul id="dept_list"></ul>
@@ -18,3 +29,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
