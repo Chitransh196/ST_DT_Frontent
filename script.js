@@ -32,7 +32,7 @@ function login() {
     .then(data => {
       if (data.access_token) {
         localStorage.setItem("token", data.access_token);
-        document.getElementById("login_msg").innerText = "Login successful";
+        window.location.href = "dashboard.html";
       } else {
         document.getElementById("login_msg").innerText =
           data.detail || "Login failed";
@@ -41,6 +41,11 @@ function login() {
     .catch(() => {
       document.getElementById("login_msg").innerText = "Server error";
     });
+}
+
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "index.html";
 }
 
 function addDepartment() {
@@ -65,7 +70,6 @@ function loadDepartments() {
     .then(data => {
       const list = document.getElementById("dept_list");
       if (!list) return;
-
       list.innerHTML = "";
       data.forEach(dept => {
         const li = document.createElement("li");
@@ -98,12 +102,10 @@ function loadStudents() {
     .then(data => {
       const list = document.getElementById("student_list");
       if (!list) return;
-
       list.innerHTML = "";
       data.forEach(student => {
         const li = document.createElement("li");
-        li.innerText =
-          `${student.name} (Dept ID: ${student.department_id})`;
+        li.innerText = `${student.name} (Dept ID: ${student.department_id})`;
         list.appendChild(li);
       });
     });
@@ -115,7 +117,6 @@ function loadDepartmentDropdown() {
     .then(data => {
       const select = document.getElementById("department_select");
       if (!select) return;
-
       select.innerHTML = `<option value="">Select Department</option>`;
       data.forEach(dept => {
         const option = document.createElement("option");

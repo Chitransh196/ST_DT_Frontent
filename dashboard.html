@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="design.css">
+  <script>
+    if (!localStorage.getItem("token")) {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+
+  <header class="topbar">
+    <h1>Student Department Dashboard</h1>
+    <button class="btn outline" onclick="logout()">Logout</button>
+  </header>
+
+  <div class="dashboard">
+
+    <div class="panel">
+      <h3>Departments</h3>
+      <input id="dept_name" placeholder="Department name">
+      <button class="btn full" onclick="addDepartment()">Add Department</button>
+      <ul id="dept_list"></ul>
+    </div>
+
+    <div class="panel">
+      <h3>Students</h3>
+      <input id="student_name" placeholder="Student name">
+      <select id="department_select"></select>
+      <button class="btn full" onclick="addStudent()">Add Student</button>
+      <ul id="student_list"></ul>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
