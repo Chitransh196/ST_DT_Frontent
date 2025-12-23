@@ -87,7 +87,6 @@ function loadDepartments() {
     });
 }
 
-
 function addStudent() {
   const name = document.getElementById("student_name").value;
   const dept_id = document.getElementById("dept_id").value;
@@ -110,7 +109,7 @@ function addStudent() {
 }
 
 function loadStudents() {
-  fetch(`${API_URL}/students`)
+  fetch(`${API_URL}/Student`)
     .then(res => res.json())
     .then(data => {
       const list = document.getElementById("student_list");
