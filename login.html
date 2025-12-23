@@ -10,27 +10,25 @@
   <div class="card small">
     <h2>Login</h2>
 
-    <input
-      id="login_username"
-      type="text"
-      placeholder="Username"
-      required
-    >
+    <form onsubmit="login(event)">
+      <input
+        id="login_username"
+        type="text"
+        placeholder="Username"
+        required
+      >
 
-    <input
-      id="login_password"
-      type="password"
-      placeholder="Password"
-      required
-    >
+      <input
+        id="login_password"
+        type="password"
+        placeholder="Password"
+        required
+      >
 
-    <button
-      class="btn full"
-      onclick="login(event)"
-      type="button"
-    >
-      Login
-    </button>
+      <button class="btn full" type="submit">
+        Login
+      </button>
+    </form>
 
     <p id="login_msg" class="msg"></p>
 
@@ -41,4 +39,5 @@
   </div>
 
   <script src="script.js"></script>
-</b
+</body>
+</html>

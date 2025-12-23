@@ -10,10 +10,12 @@
   <div class="card small">
     <h2>Create Account</h2>
 
-    <input id="username" type="text" placeholder="Username" required>
-    <input id="password" type="password" placeholder="Password (min 4 chars)" required>
+    <form onsubmit="signup(event)">
+      <input id="username" type="text" placeholder="Username" required>
+      <input id="password" type="password" placeholder="Password (min 4 chars)" required>
 
-    <button class="btn full" onclick="signup(event)">Signup</button>
+      <button class="btn full" type="submit">Signup</button>
+    </form>
 
     <p id="msg" class="msg"></p>
 
